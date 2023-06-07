@@ -1,27 +1,127 @@
 ---
 title: "CHOYOA 3"
-author: "KM"
-format: html
+author: "Katie Miller"
+format:
+  html:
+    toc: true
+    toc-location: left
+    code-fold: true
+    theme: yeti
+execute:
+  message: false
+  warning: false
 editor: visual
 ---
 
-## Quarto
-
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
+## Task 1 
+Set Up:
 ```{r}
-1 + 1
+library(ggplot2)
+library(tibble)
 ```
 
-You can add options to executable code like this
-
-```{r}
-#| echo: false
-2 * 2
+Exercise 1:
+```{r exercise-1}
+mpg %>% 
+  ggplot(aes(hwy, cty, color = manufacturer, size = displ)) +
+  geom_point(show.legend = FALSE) +
+  coord_polar() +
+  theme_void() 
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+Exercise 2:
+```{r exercise-2.1}
+polar_art <- function(seed, n, palette) {
+  
+  # set the state of the random number generator
+  set.seed(seed)
+  
+  # data frame containing random values for 
+  # aesthetics we might want to use in the art
+  dat <- tibble(
+    x0 = runif(n),
+    y0 = runif(n),
+    x1 = x0 + runif(n, min = -.2, max = .2),
+    y1 = y0 + runif(n, min = -.2, max = .2),
+    shade = runif(n), 
+    size = runif(n)
+  )
+  
+  # plot segments in various colours, using 
+  # polar coordinates and a gradient palette
+  dat |> 
+    ggplot(aes(
+      x = x0,
+      y = y0,
+      xend = x1,
+      yend = y1,
+      colour = shade,
+      size = size
+    )) +
+    geom_segment(show.legend = FALSE) +
+    coord_polar() +
+    scale_y_continuous(expand = c(0, 0)) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_colour_gradientn(colours = palette) + 
+    scale_size(range = c(0, 10)) + 
+    theme_void()
+}
+polar_art(seed = 13, n = 111, palette = c("lightblue", "purple", "darkblue"))
+```
+
+```{r exercise-2.2}
+polar_art_new <- function(seed, n, palette) {
+  
+  # set the state of the random number generator
+  set.seed(seed)
+  
+  # data frame containing random values for 
+  # aesthetics we might want to use in the art
+  dat <- tibble(
+    x0 = runif(n),
+    y0 = runif(n),
+    x1 = x0 + runif(n, min = -.2, max = .2),
+    y1 = y0 + runif(n, min = -.2, max = .2),
+    shade = runif(n), 
+    size = runif(n)
+  )
+  
+  # plot segments in various colours, using 
+  # polar coordinates and a gradient palette
+  dat |> 
+    ggplot(aes(
+      x = x0,
+      y = y0,
+      xend = x1,
+      yend = y1,
+      colour = shade,
+      size = size
+    )) +
+    geom_point(show.legend = FALSE) +
+    coord_polar() +
+    scale_y_continuous(expand = c(0, 0)) +
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_colour_gradientn(colours = palette) + 
+    scale_size(range = c(0, 5)) + 
+    theme_void()
+}
+polar_art_new(seed = 13, n = 111, palette = c("lightblue", "purple", "darkblue"))
+```
+
+
+Exercise 3
+```{r exercise 3.1}
+
+```
+
+Exercise 4
+
+
+## Task 2
+
+
+
+
+
+
+## Task 3 
