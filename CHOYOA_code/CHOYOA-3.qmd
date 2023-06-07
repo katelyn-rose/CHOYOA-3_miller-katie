@@ -115,7 +115,7 @@ polar_art_new(seed = 13, n = 111, palette = c("lightblue", "purple", "darkblue")
 
 Exercise 3
 
-```{r exercise 3.1}
+```{r exercise-3.1}
 
 ```
 
@@ -124,7 +124,7 @@ Exercise 4
 # Task 2
 ## Spatial noise tricks
 Set Up:
-```{r}
+```{r set-up}
 library(dplyr)
 library(purrr)
 library(tibble)
@@ -134,7 +134,7 @@ library(ambient)
 ```
 
 Exercise 1:
-```{r}
+```{r excersise-1}
 # random color palette generator
 sample_canva <- function(seed = NULL) {
   if(!is.null(seed)) set.seed(seed)
@@ -144,12 +144,10 @@ sample_canva <- function(seed = NULL) {
 x_coords <- seq(from = 0, to = 1, length.out = 800)
 y_coords <- seq(from = 0, to = 1, length.out = 800)
 canvas <- long_grid(x = x_coords, y = y_coords) 
-canvas
 
 # add gen_perlin() function to our canvas to add wavy patterns
 canvas <- canvas |> 
   mutate(paint = gen_perlin(x, y, frequency = 10, seed = 1234))
-canvas
 
 # create art object with the canvas object made previously
 art <- ggplot(canvas, aes(x, y, fill = paint)) + 
@@ -167,5 +165,12 @@ art +
   scale_y_continuous(expand = c(0, 0)) +
   scale_fill_gradientn(colours = sample_canva())
 ```
+
+Exercise 2:
+```{r}
+
+```
+
+
 
 ## Task 3
