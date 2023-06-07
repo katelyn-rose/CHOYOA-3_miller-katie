@@ -80,15 +80,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#task-1" id="toc-task-1" class="nav-link active" data-scroll-target="#task-1">Task 1</a>
-  <ul class="collapse">
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
-  </ul></li>
-  <li><a href="#task-2" id="toc-task-2" class="nav-link" data-scroll-target="#task-2">Task 2</a>
-  <ul class="collapse">
-  <li><a href="#spatial-noise-tricks" id="toc-spatial-noise-tricks" class="nav-link" data-scroll-target="#spatial-noise-tricks">Spatial noise tricks</a></li>
-  <li><a href="#task-3" id="toc-task-3" class="nav-link" data-scroll-target="#task-3">Task 3</a></li>
-  </ul></li>
+  <li><a href="#task-1-getting-started" id="toc-task-1-getting-started" class="nav-link active" data-scroll-target="#task-1-getting-started">Task 1: getting started</a></li>
+  <li><a href="#task-2-spatial-noise-tricks" id="toc-task-2-spatial-noise-tricks" class="nav-link" data-scroll-target="#task-2-spatial-noise-tricks">Task 2: spatial noise tricks</a></li>
+  <li><a href="#task-3-tiles-and-tessellations" id="toc-task-3-tiles-and-tessellations" class="nav-link" data-scroll-target="#task-3-tiles-and-tessellations">Task 3: tiles and tessellations</a></li>
+  <li><a href="#task-4-putting-it-all-together" id="toc-task-4-putting-it-all-together" class="nav-link" data-scroll-target="#task-4-putting-it-all-together">Task 4: putting it all together</a></li>
   </ul>
 </nav>
 </div>
@@ -119,16 +114,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="task-1" class="level1">
-<h1>Task 1</h1>
-<section id="getting-started" class="level2">
-<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
+<section id="task-1-getting-started" class="level1">
+<h1>Task 1: getting started</h1>
 <p>Set Up:</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># loading in packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Exercise 1:</p>
@@ -237,21 +231,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Exercise 3</p>
 <p>Exercise 4</p>
 </section>
-</section>
-<section id="task-2" class="level1">
-<h1>Task 2</h1>
-<section id="spatial-noise-tricks" class="level2">
-<h2 class="anchored" data-anchor-id="spatial-noise-tricks">Spatial noise tricks</h2>
+<section id="task-2-spatial-noise-tricks" class="level1">
+<h1>Task 2: spatial noise tricks</h1>
 <p>Set Up:</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ambient)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#loading in packages</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ambient)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Exercise 1:</p>
@@ -305,9 +297,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Exercise 2:</p>
 </section>
-<section id="task-3" class="level2">
-<h2 class="anchored" data-anchor-id="task-3">Task 3</h2>
+<section id="task-3-tiles-and-tessellations" class="level1">
+<h1>Task 3: tiles and tessellations</h1>
+<p>Exercise 1:</p>
 </section>
+<section id="task-4-putting-it-all-together" class="level1">
+<h1>Task 4: putting it all together</h1>
 </section>
 
 </main>
