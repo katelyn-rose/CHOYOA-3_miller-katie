@@ -13,7 +13,8 @@ execute:
 editor: visual
 ---
 
-## Task 1
+# Task 1
+## Getting Started
 
 Set Up:
 
@@ -120,6 +121,51 @@ Exercise 3
 
 Exercise 4
 
-## Task 2
+# Task 2
+## Spatial noise tricks
+Set Up:
+```{r}
+library(dplyr)
+library(purrr)
+library(tibble)
+library(ggplot2)
+library(ggthemes)
+library(ambient)
+```
+
+Exercise 1:
+```{r}
+# random color palette generator
+sample_canva <- function(seed = NULL) {
+  if(!is.null(seed)) set.seed(seed)
+  sample(ggthemes::canva_palettes, 1)[[1]]}
+
+# define canvas
+x_coords <- seq(from = 0, to = 1, length.out = 800)
+y_coords <- seq(from = 0, to = 1, length.out = 800)
+canvas <- long_grid(x = x_coords, y = y_coords) 
+canvas
+
+# add gen_perlin() function to our canvas to add wavy patterns
+canvas <- canvas |> 
+  mutate(paint = gen_perlin(x, y, frequency = 10, seed = 1234))
+canvas
+
+# create art object with the canvas object made previously
+art <- ggplot(canvas, aes(x, y, fill = paint)) + 
+  geom_raster(show.legend = FALSE) 
+art
+
+# plotting our art object with aesthetics 
+art + 
+  theme_void() +
+  coord_equal()
+art + 
+  theme_void() +
+  coord_equal() +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  scale_fill_gradientn(colours = sample_canva())
+```
 
 ## Task 3
