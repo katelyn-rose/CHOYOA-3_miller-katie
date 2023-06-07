@@ -13,12 +13,12 @@ execute:
 editor: visual
 ---
 
-# Task 1
-## Getting Started
+# Task 1: getting started
 
 Set Up:
 
 ```{r}
+# loading in packages
 library(ggplot2)
 library(tibble)
 ```
@@ -121,10 +121,10 @@ Exercise 3
 
 Exercise 4
 
-# Task 2
-## Spatial noise tricks
+# Task 2: spatial noise tricks
 Set Up:
 ```{r set-up}
+#loading in packages
 library(dplyr)
 library(purrr)
 library(tibble)
@@ -173,4 +173,14 @@ Exercise 2:
 
 
 
-## Task 3
+# Task 3: tiles and tessellations
+
+Exercise 1:
+```{r}
+
+```
+
+
+
+
+# Task 4: putting it all together
