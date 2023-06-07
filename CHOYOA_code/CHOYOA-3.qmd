@@ -13,14 +13,17 @@ execute:
 editor: visual
 ---
 
-## Task 1 
+## Task 1
+
 Set Up:
+
 ```{r}
 library(ggplot2)
 library(tibble)
 ```
 
 Exercise 1:
+
 ```{r exercise-1}
 mpg %>% 
   ggplot(aes(hwy, cty, color = manufacturer, size = displ)) +
@@ -30,6 +33,7 @@ mpg %>%
 ```
 
 Exercise 2:
+
 ```{r exercise-2.1}
 polar_art <- function(seed, n, palette) {
   
@@ -108,20 +112,14 @@ polar_art_new <- function(seed, n, palette) {
 polar_art_new(seed = 13, n = 111, palette = c("lightblue", "purple", "darkblue"))
 ```
 
-
 Exercise 3
+
 ```{r exercise 3.1}
 
 ```
 
 Exercise 4
 
-
 ## Task 2
 
-
-
-
-
-
-## Task 3 
+## Task 3
