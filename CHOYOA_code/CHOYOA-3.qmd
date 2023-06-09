@@ -29,6 +29,7 @@ library(dplyr)
 Exercise 1:
 
 ```{r exercise-1}
+# exercise 1: creating a plot using the mpg data set
 mpg %>% 
   ggplot(aes(hwy, cty, color = manufacturer, size = displ)) +
   geom_point(show.legend = FALSE) +
@@ -39,6 +40,7 @@ mpg %>%
 Exercise 2:
 
 ```{r exercise-2.1}
+# exercise 2.1 creating polar art object 
 polar_art <- function(seed, n, palette) {
   
   # set the state of the random number generator
@@ -78,6 +80,7 @@ polar_art(seed = 13, n = 111, palette = c("lightblue", "purple", "darkblue"))
 ```
 
 ```{r exercise-2.2}
+# exercise 2.2:
 polar_art_new <- function(seed, n, palette) {
   
   # set the state of the random number generator
@@ -152,7 +155,7 @@ show_col(sample_canva2())
 
 Exercise 4
 ```{r}
-# Exercise 4.1: testing flexibility of functions
+# exercise 4.1: testing flexibility of functions
 sample_canva <- function(seed = NULL) {
   if(!is.null(seed)) set.seed(seed)
   sample(ggthemes::canva_palettes, 1)[[1]]
@@ -218,7 +221,7 @@ polar_styled_plot(palette = sample_canva(seed = 6)) +
 ```
 
 ```{r}
-# creating my own style of plot
+# # exercise 4.2: creating my own style of plot
 my_styled_plot <- function(data = NULL, palette) {
   ggplot(data = data, mapping = aes(x = x0, y = y0, xend = x1, yend = y1, 
                                     colour = shade, size = size)) + 
@@ -251,11 +254,12 @@ library(tibble)
 library(ggplot2)
 library(ggthemes)
 library(ambient)
+library(here)
 ```
 
 Exercise 1:
 ```{r excersise-1}
-# random color palette generator
+# exercise 1: random color palette generator
 sample_canva <- function(seed = NULL) {
   if(!is.null(seed)) set.seed(seed)
   sample(ggthemes::canva_palettes, 1)[[1]]}
@@ -288,8 +292,81 @@ art +
 
 Exercise 2:
 ```{r}
+# exercise 2.2: loading in function
+make_noise_art <- function(
+    generator = gen_perlin, 
+    frequency = 10, 
+    seed = 1234,
+    pixels = 2000,
+    palette = c("#e5ddc8", "#01949a", "#004369", "#db1f48"), ...) {
+  
+  # define the grid
+  canvas <- long_grid(
+    x = seq(from = 0, to = 1, length.out = pixels),
+    y = seq(from = 0, to = 1, length.out = pixels)) 
+  
+  # use the generator to add paint
+  canvas <- canvas |>
+    mutate(paint = generator(x, y,frequency = frequency, seed = seed, ...))
+  
+  # use ggplot2 to draw the picture
+  art <- canvas |> 
+    ggplot(aes(x, y, fill = paint)) + 
+    geom_raster(show.legend = FALSE) +
+    theme_void() +
+    coord_equal() +
+    scale_x_continuous(expand = c(0, 0)) +
+    scale_y_continuous(expand = c(0, 0)) +
+    scale_fill_gradientn(colours = palette)
+  
+  return(art)}
 
+# call make_noise_art with idiosyncratic parameters
+art <- make_noise_art(
+  generator = gen_worley,
+  seed = 666, 
+  palette = sample_canva(333),
+  value = "distance",
+  pixels = 1000
+)
+
+art
+
+# save the plot to a file
+ggsave(
+  filename = here("output", "ktnoise-art.png"), 
+  plot = art,
+  width = 1000,
+  height = 1000,
+  units = "px",
+  dpi = 300)
 ```
+
+```{r}
+# exercise 2.3: making blank canvas
+blank_canvas <- long_grid(
+  x = seq(from = 0, to = 1, length.out = 2000),
+  y = seq(from = 0, to = 1, length.out = 2000)) 
+
+plot_painted_canvas <- function(canvas, palette = NULL) {
+  if(is.null(palette)) {
+    palette <- c("#e5ddc8","#01949a","#004369","#db1f48")
+  }
+  canvas |> 
+    ggplot(aes(x, y, fill = paint)) + 
+    geom_raster(show.legend = FALSE) +
+    theme_void() +
+    coord_equal() +
+    scale_x_continuous(expand = c(0, 0)) +
+    scale_y_continuous(expand = c(0, 0)) +
+    scale_fill_gradientn(colours = palette)}
+
+# creating my plot
+blank_canvas |>
+  mutate(paint = gen_waves(x, y, frequency = 90, seed = 7986)) |>
+  plot_painted_canvas()
+```
+
 
 
 
