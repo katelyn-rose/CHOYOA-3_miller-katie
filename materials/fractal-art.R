@@ -46,3 +46,4 @@ fractal_art <- function(fractal, generator, palette = NULL, ...) {
 
 
 
+
