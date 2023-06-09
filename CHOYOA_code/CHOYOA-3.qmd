@@ -377,7 +377,7 @@ blank_canvas |>
 
 ```{r}
 # exercise 4: Fractals
-#loading the fucntion
+#loading the function
 blank_canvas <- long_grid(
   x = seq(from = 0, to = 1, length.out = 2000),
   y = seq(from = 0, to = 1, length.out = 2000)) 
@@ -659,3 +659,33 @@ mosaic |>
 
 
 # Task 4: putting it all together
+```{r}
+# creating a blank canvas 
+blank_canvas <- long_grid(
+  x = seq(from = 0, to = 1, length.out = 2000),
+  y = seq(from = 0, to = 1, length.out = 2000))
+
+# painting the canvas with waves
+blank_canvas |>
+  mutate(paint = gen_waves(x, y, frequency = 5))
+
+# creating a generator using a gating method
+gating_generator <- function(x, y, frequency, ...) {
+  lf <- gen_perlin(x, y, frequency = frequency, ...)
+  mf <- gen_simplex(y, x, frequency = frequency * 92, ...)
+  hf <- gen_worley(x, y, frequency = frequency * 8, ...)
+  gate <- gen_simplex(x, y, frequency = -frequency * 111, ...) 
+  gate <- normalise(gate)
+  paint <- lf + hf - mf*0.67 +
+    (mf - 1) * (gate >= .5 & gate < .5) + 
+    (hf + 9) * (gate >= .2)
+  return(paint)}
+
+# selecting a color palette
+pal <- sample_canva(36)
+
+# creating the final plot
+fractal_art(ridged, gating_generator, palette = pal, seed = 9, octaves = 1)
+
+```
+

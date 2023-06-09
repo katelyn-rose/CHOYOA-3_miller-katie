@@ -550,7 +550,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># exercise 4: Fractals</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#loading the fucntion</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#loading the function</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>blank_canvas <span class="ot">&lt;-</span> <span class="fu">long_grid</span>(</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">2000</span>),</span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">2000</span>)) </span>
@@ -667,7 +667,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.433 sec elapsed</code></pre>
+<pre><code>0.485 sec elapsed</code></pre>
 </div>
 <details>
 <summary>Code</summary>
@@ -738,7 +738,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb25-65"><a href="#cb25-65" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>2.956 sec elapsed</code></pre>
+<pre><code>3.342 sec elapsed</code></pre>
 </div>
 </div>
 <p>Curl art 1: 0.458 sec elapsed Curl art 2: 3.151 sec elapsed Curl art 2 is ~2.5 seconds slower.</p>
@@ -957,6 +957,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="task-4-putting-it-all-together" class="level1">
 <h1>Task 4: putting it all together</h1>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creating a blank canvas </span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>blank_canvas <span class="ot">&lt;-</span> <span class="fu">long_grid</span>(</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">2000</span>),</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">length.out =</span> <span class="dv">2000</span>))</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co"># painting the canvas with waves</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>blank_canvas <span class="sc">|&gt;</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">paint =</span> <span class="fu">gen_waves</span>(x, y, <span class="at">frequency =</span> <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4,000,000 × 3
+       x        y paint
+   &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+ 1     0 0        1    
+ 2     0 0.000500 1.00 
+ 3     0 0.00100  1.00 
+ 4     0 0.00150  0.999
+ 5     0 0.00200  0.998
+ 6     0 0.00250  0.997
+ 7     0 0.00300  0.996
+ 8     0 0.00350  0.994
+ 9     0 0.00400  0.992
+10     0 0.00450  0.990
+# ℹ 3,999,990 more rows</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creating a generator using a gating method</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>gating_generator <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, frequency, ...) {</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  lf <span class="ot">&lt;-</span> <span class="fu">gen_perlin</span>(x, y, <span class="at">frequency =</span> frequency, ...)</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  mf <span class="ot">&lt;-</span> <span class="fu">gen_simplex</span>(y, x, <span class="at">frequency =</span> frequency <span class="sc">*</span> <span class="dv">92</span>, ...)</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  hf <span class="ot">&lt;-</span> <span class="fu">gen_worley</span>(x, y, <span class="at">frequency =</span> frequency <span class="sc">*</span> <span class="dv">8</span>, ...)</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>  gate <span class="ot">&lt;-</span> <span class="fu">gen_simplex</span>(x, y, <span class="at">frequency =</span> <span class="sc">-</span>frequency <span class="sc">*</span> <span class="dv">111</span>, ...) </span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  gate <span class="ot">&lt;-</span> <span class="fu">normalise</span>(gate)</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>  paint <span class="ot">&lt;-</span> lf <span class="sc">+</span> hf <span class="sc">-</span> mf<span class="sc">*</span><span class="fl">0.67</span> <span class="sc">+</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>    (mf <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> (gate <span class="sc">&gt;=</span> .<span class="dv">5</span> <span class="sc">&amp;</span> gate <span class="sc">&lt;</span> .<span class="dv">5</span>) <span class="sc">+</span> </span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>    (hf <span class="sc">+</span> <span class="dv">9</span>) <span class="sc">*</span> (gate <span class="sc">&gt;=</span> .<span class="dv">2</span>)</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(paint)}</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a><span class="co"># selecting a color palette</span></span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">sample_canva</span>(<span class="dv">36</span>)</span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a><span class="co"># creating the final plot</span></span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a><span class="fu">fractal_art</span>(ridged, gating_generator, <span class="at">palette =</span> pal, <span class="at">seed =</span> <span class="dv">9</span>, <span class="at">octaves =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<p><img src="CHOYOA-3_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
 
 </main>
