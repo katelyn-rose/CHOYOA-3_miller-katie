@@ -647,17 +647,15 @@ mosaic <- st_truchet_ms(
   p2 = 0.6, # scale 2
   p3 = 0.1, # scale 3
   xlim = c(1, 6),
-  ylim = c(1, 6)
-)
+  ylim = c(1, 6))
+
 # creating my own plot
 mosaic |> 
   ggplot(aes(fill = color)) +
   geom_sf(color = NA, show.legend = FALSE) + 
   scale_fill_gradientn(colours = c("lightpink", "hotpink")) + 
   theme_void()
-
-
 ```
-Edited code but could not render because package ‘truchet’ is not available for my version of R.
+
 
 # Task 4: putting it all together
